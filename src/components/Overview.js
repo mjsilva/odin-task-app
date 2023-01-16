@@ -1,12 +1,26 @@
 import { Component } from "react";
 
 class Overview extends Component {
-  render(props) {
+
+  render() {
     const tasks = this.props.tasks;
     return (
       <div className="taskList">
-        {tasks.map((task) => {
-          return <div className="task" key={task.id}>{task.text}</div>;
+        {tasks.reverse().map((task) => {
+          return (
+            <div className="taskContainer" key={"taskContainer-" + task.id}>
+              <div className="task" key={"task-" + task.id}>
+                {task.text}
+              </div>
+              <span
+                onClick={(event) => this.props.onClickTaskDelete(event, task.id)}
+                className="taskDelete material-symbols-outlined"
+                key={"taskDelete-" + task.id}
+              >
+                delete
+              </span>
+            </div>
+          );
         })}
       </div>
     );

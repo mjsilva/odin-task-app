@@ -21,6 +21,7 @@ class App extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.onSubmitTask = this.onSubmitTask.bind(this);
+    this.onClickTaskDelete = this.onClickTaskDelete.bind(this);
   }
 
   onSubmitTask() {
@@ -45,6 +46,12 @@ class App extends Component {
     });
   }
 
+  onClickTaskDelete(e, taskId) {
+    this.setState({
+      tasks: this.state.tasks.filter((task) => task.id !== taskId),
+    });
+  }
+
   render() {
     const { task, tasks } = this.state;
     return (
@@ -59,9 +66,9 @@ class App extends Component {
             onChange={this.handleChange}
             placeholder="Add your new todo"
           />
-          <button onClick={this.onSubmitTask}>+</button>
+          <button className="addTaskBto" onClick={this.onSubmitTask}>+</button>
         </div>
-        <Overview tasks={tasks} />
+        <Overview tasks={tasks} onClickTaskDelete={this.onClickTaskDelete} />
       </div>
     );
   }
