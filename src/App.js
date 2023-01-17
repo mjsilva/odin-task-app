@@ -10,11 +10,13 @@ class App extends Component {
       task: {
         text: "",
         id: uniqid(),
+        done: false,
       },
       tasks: [
         {
           id: "1",
           text: "Sample Task",
+          done: false,
         },
       ],
     };
@@ -22,6 +24,7 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.onSubmitTask = this.onSubmitTask.bind(this);
     this.onClickTaskDelete = this.onClickTaskDelete.bind(this);
+    this.onClickTaskDone = this.onClickTaskDone.bind(this);
   }
 
   onSubmitTask() {
@@ -33,6 +36,7 @@ class App extends Component {
       task: {
         text: "",
         id: uniqid(),
+        done: false,
       },
     });
   }
@@ -42,6 +46,7 @@ class App extends Component {
       task: {
         text: e.target.value,
         id: this.state.task.id,
+        done: false,
       },
     });
   }
@@ -49,6 +54,21 @@ class App extends Component {
   onClickTaskDelete(e, taskId) {
     this.setState({
       tasks: this.state.tasks.filter((task) => task.id !== taskId),
+    });
+  }
+
+  onClickTaskDone(e, task) {
+    this.setState({
+      tasks: this.state.tasks.map(
+        function (elTask) {
+          if (elTask.id === this.clickedTask.id) {
+            elTask.done = !this.clickedTask.done;
+          }
+
+          return elTask;
+        },
+        { clickedTask: task }
+      ),
     });
   }
 
@@ -66,9 +86,15 @@ class App extends Component {
             onChange={this.handleChange}
             placeholder="Add your new todo"
           />
-          <button className="addTaskBto" onClick={this.onSubmitTask}>+</button>
+          <button className="addTaskBto" onClick={this.onSubmitTask}>
+            +
+          </button>
         </div>
-        <Overview tasks={tasks} onClickTaskDelete={this.onClickTaskDelete} />
+        <Overview
+          tasks={tasks}
+          onClickTaskDelete={this.onClickTaskDelete}
+          onClickTaskDone={this.onClickTaskDone}
+        />
       </div>
     );
   }
