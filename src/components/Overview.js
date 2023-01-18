@@ -5,7 +5,7 @@ class Overview extends Component {
     const tasks = this.props.tasks;
     return (
       <div className="taskList">
-        {tasks.reverse().map((task) => {
+        {tasks.map((task) => {
           return (
             <div className={`taskContainer ${task.done ? "strikethrough" : ""}`} key={"taskContainer-" + task.id}>
               <div className="taskDoneContainer">
