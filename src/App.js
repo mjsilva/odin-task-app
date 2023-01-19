@@ -25,6 +25,7 @@ class App extends Component {
     this.onSubmitTask = this.onSubmitTask.bind(this);
     this.onClickTaskDelete = this.onClickTaskDelete.bind(this);
     this.onClickTaskDone = this.onClickTaskDone.bind(this);
+    this.onKeyDownTaskDone = this.onKeyDownTaskDone.bind(this);
   }
 
   onSubmitTask() {
@@ -72,6 +73,12 @@ class App extends Component {
     });
   }
 
+  onKeyDownTaskDone = (event) => {
+    if(event.key === 'Enter'){
+      this.onSubmitTask()
+    }
+  }
+
   render() {
     const { task, tasks } = this.state;
     return (
@@ -85,6 +92,7 @@ class App extends Component {
             value={task.text}
             onChange={this.handleChange}
             placeholder="Add your new todo"
+            onKeyDown={this.onKeyDownTaskDone}
           />
           <button className="addTaskBto" onClick={this.onSubmitTask}>
             +
