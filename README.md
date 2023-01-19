@@ -9,7 +9,7 @@ For [this](https://www.theodinproject.com/lessons/node-path-javascript-handle-in
 
 **alternatively**
 
-Click [here](https://github.com/mjsilva/odin-task-app)
+Click [here](https://mjsilva.github.io/odin-task-app/)
 
 # License
 
